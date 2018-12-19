@@ -13,6 +13,7 @@
         <module>netty-inaction</module>
         <module>netty-common</module>
         <module>netty-transport</module>
+        <module>netty-buffer</module>
     </modules>
 
     <build>

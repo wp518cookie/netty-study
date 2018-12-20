@@ -1,5 +1,7 @@
 package io.netty.channel;
 
+import io.netty.buffer.ByteBufAllocator;
+
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
 import java.util.Map;
@@ -14,7 +16,7 @@ public interface ChannelConfig {
 
     boolean setOptions(Map<ChannelOption<?>, ?> options);
 
-
+    <T> T getOption(ChannelOption<T> option);
 
     /**
      * Sets a configuration property with the specified name and value.

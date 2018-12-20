@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.netty.util.internal.SystemPropertyUtil.getInt;
+import static java.lang.Math.max;
 
 /**
  * Allows a way to register some {@link Runnable} that will executed once there are no references to an {@link Object}

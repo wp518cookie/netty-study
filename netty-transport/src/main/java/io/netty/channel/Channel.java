@@ -1,5 +1,6 @@
 package io.netty.channel;
 
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.util.AttributeMap;
 
 import java.net.InetSocketAddress;

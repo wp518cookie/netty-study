@@ -11,5 +11,11 @@
 
     <artifactId>netty-example</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.ping.wu</groupId>
+            <artifactId>netty-transport</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

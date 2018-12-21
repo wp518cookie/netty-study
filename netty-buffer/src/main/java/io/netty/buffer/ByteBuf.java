@@ -17,6 +17,16 @@ import java.nio.charset.UnsupportedCharsetException;
 /**
  * @author wuping
  * @date 2018/12/19
+ * reference-counting 来判断何时可以释放
+ * 跟 jdk nio对比
+ * 1、可以自定义缓冲类型
+ * 2、通过一个内置的复合缓冲类型实现零拷贝
+ * 3、扩展性好，比如 StringBuilder ? todo 嘛意思
+ * 4、不需要调用flip() 来切换读/写模式
+ * 5、读取和写入索引分开
+ * 6、方法链
+ * 7、引用技术
+ * 8、Pooling（池)
  */
 
 public abstract class ByteBuf implements ReferenceCounted, Comparable<ByteBuf> {

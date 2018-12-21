@@ -25,6 +25,8 @@ import static io.netty.util.internal.ObjectUtil.checkNotNull;
  * @author wuping
  * @date 2018/12/19
  * todo 深入理解该类
+ * 复合缓冲区 ： 创建多个不同的ByteBuf,提供这些ByteBuf组合的视图
+ * 里头有一个ArrayList<ByteBuf>
  */
 
 public class CompositeByteBuf extends AbstractReferenceCountedByteBuf implements Iterable<ByteBuf> {

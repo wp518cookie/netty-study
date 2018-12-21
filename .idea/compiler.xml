@@ -10,6 +10,7 @@
         <module name="netty-common" />
         <module name="netty-example" />
         <module name="netty-inaction" />
+        <module name="netty-resolver" />
         <module name="netty-transport" />
       </profile>
     </annotationProcessing>

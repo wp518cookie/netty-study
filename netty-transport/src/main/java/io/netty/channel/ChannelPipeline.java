@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 /**
  * @author wuping
  * @date 2018/12/20
+ * ChannelPipeline是 ChannelHandler链的容器
  */
 
 public interface ChannelPipeline

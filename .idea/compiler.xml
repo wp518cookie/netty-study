@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="netty-buffer" />
-        <module name="netty-common" />
         <module name="netty-example" />
-        <module name="netty-inaction" />
         <module name="netty-resolver" />
         <module name="netty-transport" />
+        <module name="netty-common" />
+        <module name="netty-buffer" />
+        <module name="netty-inaction" />
+        <module name="netty-advanced" />
       </profile>
     </annotationProcessing>
   </component>

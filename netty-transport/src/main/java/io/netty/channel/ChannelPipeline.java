@@ -11,6 +11,33 @@ import java.util.NoSuchElementException;
  * @author wuping
  * @date 2018/12/20
  * ChannelPipeline是 ChannelHandler链的容器
+ * 对于 Outbound事件:
+ *
+ * Outbound 事件是请求事件(由 Connect 发起一个请求, 并最终由 unsafe 处理这个请求)
+ *
+ * Outbound 事件的发起者是 Channel
+ *
+ * Outbound 事件的处理者是 unsafe
+ *
+ * Outbound 事件在 Pipeline 中的传输方向是 tail -> head.
+ *
+ * 在 ChannelHandler 中处理事件时, 如果这个 Handler 不是最后一个 Hnalder, 则需要调用 ctx.xxx (例如 ctx.connect) 将此事件继续传播下去. 如果不这样做, 那么此事件的传播会提前终止.
+ *
+ * Outbound 事件流: Context.OUT_EVT -> Connect.findContextOutbound -> nextContext.invokeOUT_EVT -> nextHandler.OUT_EVT -> nextContext.OUT_EVT
+ *
+ * 对于 Inbound 事件:
+ *
+ * Inbound 事件是通知事件, 当某件事情已经就绪后, 通知上层.
+ *
+ * Inbound 事件发起者是 unsafe
+ *
+ * Inbound 事件的处理者是 Channel, 如果用户没有实现自定义的处理方法, 那么Inbound 事件默认的处理者是 TailContext, 并且其处理方法是空实现.
+ *
+ * Inbound 事件在 Pipeline 中传输方向是 head -> tail
+ *
+ * 在 ChannelHandler 中处理事件时, 如果这个 Handler 不是最后一个 Hnalder, 则需要调用 ctx.fireIN_EVT (例如 ctx.fireChannelActive) 将此事件继续传播下去. 如果不这样做, 那么此事件的传播会提前终止.
+ *
+ * Outbound 事件流: Context.fireIN_EVT -> Connect.findContextInbound -> nextContext.invokeIN_EVT -> nextHandler.IN_EVT -> nextContext.fireIN_EVT
  */
 
 public interface ChannelPipeline

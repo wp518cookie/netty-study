@@ -225,6 +225,7 @@ public class DefaultPromise<V> extends AbstractFuture<V> implements Promise<V> {
             throw new InterruptedException(toString());
         }
 
+        // eventLoop 不能被阻塞，会死锁
         checkDeadLock();
 
         synchronized (this) {

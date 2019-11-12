@@ -57,6 +57,8 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel
              *  See <a href="https://github.com/netty/netty/issues/2308">#2308</a>.
              */
             return provider.openServerSocketChannel();
+            // 类似这个效果
+//            return ServerSocketChannel.open();
         } catch (IOException e) {
             throw new ChannelException("Failed to open a server socket.", e);
         }

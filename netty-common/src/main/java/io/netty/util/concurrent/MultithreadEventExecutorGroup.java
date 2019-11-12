@@ -15,6 +15,9 @@
  */
 package io.netty.util.concurrent;
 
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -32,6 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class MultithreadEventExecutorGroup extends AbstractEventExecutorGroup {
 
+    private static final InternalLogger logger = InternalLoggerFactory.getInstance(MultithreadEventExecutorGroup.class);
     /**
      * EventExecutor 数组
      */
@@ -94,7 +98,7 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
         if (executor == null) {
             executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
         }
-
+        logger.info("MultithreadEventExecutorGroup nThreads: " + nThreads);
         // 创建 EventExecutor 数组
         children = new EventExecutor[nThreads];
 

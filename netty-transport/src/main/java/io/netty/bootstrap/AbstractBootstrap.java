@@ -302,14 +302,15 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
 
     private ChannelFuture doBind(final SocketAddress localAddress) {
         // 初始化并注册一个 Channel 对象，因为注册是异步的过程，所以返回一个 ChannelFuture 对象。
+        // MultithreadEventLoopGroup 里头里拿的 next() SinglethreaedEventLoop 注册channel
         final ChannelFuture regFuture = initAndRegister();
         final Channel channel = regFuture.channel();
         if (regFuture.cause() != null) { // 若发生异常，直接进行返回。
             return regFuture;
         }
-
+        System.out.println("regFuture.isDone() : " + regFuture.isDone());
         // 绑定 Channel 的端口，并注册 Channel 到 SelectionKey 中。
-        if (regFuture.isDone()) { // 未
+        if (regFuture.isDone()) {
             // At this point we know that the registration was complete and successful.
             ChannelPromise promise = channel.newPromise();
             doBind0(regFuture, channel, localAddress, promise); // 绑定
@@ -342,7 +343,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     final ChannelFuture initAndRegister() {
         Channel channel = null;
         try {
-            // 创建 Channel 对象
+            // 创建 Channel 对象 clazz.getConstructor().newInstance()
             channel = channelFactory.newChannel();
             // 初始化 Channel 配置
             init(channel);

@@ -105,6 +105,8 @@ public class NioEventLoopGroup extends MultithreadEventLoopGroup {
     /**
      * Sets the percentage of the desired amount of time spent for I/O in the child event loops.  The default value is
      * {@code 50}, which means the event loop will try to spend the same amount of time for I/O as for non-I/O tasks.
+     * todo 用处？
+     * 设定EventLoop的IO任务占用执行时间的比例。
      */
     public void setIoRatio(int ioRatio) {
         for (EventExecutor e: this) {
@@ -115,6 +117,7 @@ public class NioEventLoopGroup extends MultithreadEventLoopGroup {
     /**
      * Replaces the current {@link Selector}s of the child event loops with newly created {@link Selector}s to work
      * around the  infamous epoll 100% CPU bug.
+     * todo epoll 100% CPU Bug
      */
     public void rebuildSelectors() {
         for (EventExecutor e: this) {

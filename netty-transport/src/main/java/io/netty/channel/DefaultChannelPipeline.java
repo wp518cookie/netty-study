@@ -153,9 +153,9 @@ public class DefaultChannelPipeline implements ChannelPipeline {
         // voidPromise 的创建
         voidPromise =  new VoidChannelPromise(channel, true);
 
-        // 创建 Tail 及诶点
+        // 创建 Tail 节点，inbound
         tail = new TailContext(this);
-        // 创建 Head 节点
+        // 创建 Head 节点，outbound
         head = new HeadContext(this);
 
         // 相互指向

@@ -82,6 +82,7 @@ public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<E
 
     /**
      * Returns one of the {@link EventExecutor}s managed by this {@link EventExecutorGroup}.
+     * 自己不执行任务，而是将任务submit/schedule给自己管理的EventExecutor分组，一般通过next（）方法选择
      */
     EventExecutor next();
 

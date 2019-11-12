@@ -9,6 +9,11 @@ import java.net.SocketAddress;
 /**
  * @author wuping
  * @date 2018/12/18
+ * 生命周期：
+ * channelRegistered            channel注册到一个EventLoop
+ * ----> channelActive          channel变为到活跃状态，可以接收和发送数据
+ * ----> channelInActive        channel处于非活跃状态，没有连接到远程主机
+ * ----> channelUnRegistered    channel已创建但未注册到EventLoop
  */
 
 public interface Channel extends AttributeMap, ChannelOutboundInvoker, Comparable<Channel> {

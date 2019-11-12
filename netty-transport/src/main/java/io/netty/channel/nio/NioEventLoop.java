@@ -53,6 +53,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * {@link SingleThreadEventLoop} implementation which register the {@link Channel}'s to a
  * {@link Selector} and so does the multi-plexing of these in the event loop.
+ *
+ * I/O任务 即selectionKey中ready的事件，如accept,connect,read,write等，由processSelectedKeys方法触发
+ * 非IO任务 添加到taskQueue中的任务，如register0、bind0等任务，由runAllTasks方法触发
  */
 public final class NioEventLoop extends SingleThreadEventLoop {
 
@@ -531,12 +534,13 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         // fall through
                     default:
                 }
-
                 // TODO 1007 NioEventLoop cancel 方法
                 cancelledKeys = 0;
                 needsToSelectAgain = false;
 
                 final int ioRatio = this.ioRatio;
+
+                //todo ioRatio作用
                 if (ioRatio == 100) {
                     try {
                         // 处理 Channel 感兴趣的就绪 IO 事件
@@ -547,6 +551,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         runAllTasks();
                     }
                 } else {
+                    // 执行io和任务的占比
                     final long ioStartTime = System.nanoTime();
                     try {
                         // 处理 Channel 感兴趣的就绪 IO 事件

@@ -1,35 +1,30 @@
 package com.ping.wu.netty.client;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 
 /**
  * @author wuping
- * @date 2018/12/21
+ * @date 2019-04-18
  */
-
+@ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        System.out.println("Active");
-        ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks!", CharsetUtil.UTF_8)); //#2 通道连接上后写入消息 记得flush() 很重要
+        ctx.writeAndFlush(Unpooled.copiedBuffer("Neety rocks!", CharsetUtil.UTF_8));
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, ByteBuf in) {
-        System.out.println("Read");
-
-        System.out.println("Client received: " + ByteBufUtil
-                .hexDump(in.readBytes(in.readableBytes())));  //#4
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+        System.out.println("Client received: " + in.toString(CharsetUtil.UTF_8));
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx,              //#5
-                                Throwable cause) {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }
